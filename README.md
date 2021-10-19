@@ -1,2 +1,2 @@
 # UniPd-fondamenti-di-informatica
-Esercizi del corso di ingegneria informatica per la laurea in ingegneria informatica
+Esercizi di fondamenti di informatica del corso di laurea in ingegneria informatica dell'anno 2021/2022.
