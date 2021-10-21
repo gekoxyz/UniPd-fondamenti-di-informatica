@@ -12,10 +12,10 @@ public class Main {
      */
     public static int countTiles(double totalWidth, double tileWidth) {
         int tilesNumber = (int) (totalWidth / tileWidth);
-        int exceedingTiles = (tilesNumber % 4) - 1;
+        int exceedingTiles = Math.abs((tilesNumber % 4) - 1);
         // if there are no exceeding tiles i can use that number, else i need to remove
         // the offset from the tiles that could fit in the space
-        return tilesNumber + exceedingTiles;
+        return tilesNumber - exceedingTiles;
     }
 
     /**
