@@ -15,7 +15,7 @@ public class Main {
         int exceedingTiles = (tilesNumber % 4) - 1;
         // if there are no exceeding tiles i can use that number, else i need to remove
         // the offset from the tiles that could fit in the space
-        return tilesNumber - exceedingTiles;
+        return tilesNumber + exceedingTiles;
     }
 
     /**
