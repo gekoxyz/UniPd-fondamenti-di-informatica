@@ -41,7 +41,6 @@ public class Main {
         scan.close();
 
         int tilesNumber = countTiles(totalWidth, tileWidth);
-        System.out.println(tilesNumber);
         double gapSize = computeGap(totalWidth, tileWidth, tilesNumber);
 
         System.out.println("You are going to need " + tilesNumber + " tiles and there will be a gap of " + gapSize);
