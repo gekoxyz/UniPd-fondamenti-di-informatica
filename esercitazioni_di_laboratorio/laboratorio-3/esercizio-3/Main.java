@@ -19,6 +19,15 @@ public class Main {
         System.out.println("Inserisci tre parole separate da uno spazio: ");
         String words = scan.nextLine();
         scan.close();
-        
+        int wordsIndex = 0;
+        while (wordsIndex < words.length()) {
+            if (words.charAt(wordsIndex) == ' ') {
+                System.out.print('\n');
+                wordsIndex++;
+                continue;
+            }
+            System.out.print(words.charAt(wordsIndex));
+            wordsIndex++;
+        }
     }
 }
