@@ -41,7 +41,11 @@ public class DecodeWest {
 
                 System.out.println(color.toString());
                 // Modifico i colori
-                blue < 16 ? blue*= 16: blue = 0;
+                if (blue < 16) {
+                    blue *= 16;
+                } else {
+                    blue = 0;
+                }
                 // Creo un nuovo colore con questi valori RGB
                 color = new Color(blue, blue, blue);
                 // Metto il nuovo colore nell'immagine in pos (x,y)
