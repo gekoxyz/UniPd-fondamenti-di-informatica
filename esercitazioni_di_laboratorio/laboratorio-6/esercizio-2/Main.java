@@ -58,6 +58,16 @@ public class Main {
         // check sum of rows
         // check sum of columns
         // check sum of 2 main diagonals
+        int sumRow = 0;
+        // get sum of 1st row
+        for (int i = 0; i < magicSquare[0].length; i++) {
+            sumRow += magicSquare[0][i];
+        }
+        // check other rows sum is equal, if false return false
+        // get sum of 1st column
+        // check other columns ...
+        // check diagonal 1 - i = i
+        // check diagonal 2 = i = i + len (-1 each time)
         return false;
     }
 
