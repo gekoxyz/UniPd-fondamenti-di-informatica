@@ -33,6 +33,16 @@ Esempio di input per il primo quadrato:
 14 1
 */
 public class Main {
+    public static void fillMagicSquare(int magicSquare[][], int values[]) {
+        int pos = 0;
+        for (int row = 0; row < magicSquare.length; row++) {
+            for (int column = 0; column < magicSquare[row].length; column++) {
+                magicSquare[row][column] = values[pos];
+                pos++;
+            }
+        }
+    }
+
     public static boolean checkMagicSquareValues(int magicSquare[][], int number) {
         for (int row = 0; row < magicSquare.length; row++) {
             for (int column = 0; column < magicSquare[row].length; column++) {
@@ -45,6 +55,9 @@ public class Main {
     }
 
     public static boolean checkMagicSquareRules(int magicSquare[][]) {
+        // check sum of rows
+        // check sum of columns
+        // check sum of 2 main diagonals
         return false;
     }
 
@@ -70,14 +83,7 @@ public class Main {
             int cols = rows;
             // filling magic square with contents of values
             int magicSquare[][] = new int[rows][cols];
-            // TODO: redo with 3 for
-            int cont = 0;
-            for (int i = 0; i < magicSquare.length; i++) {
-                for (int j = 0; j < magicSquare[i].length; j++) {
-                    magicSquare[i][j] = values[cont];
-                    cont++;
-                }
-            }
+            fillMagicSquare(magicSquare, values);
             // printing magic square
             for (int i = 0; i < magicSquare.length; i++) {
                 System.out.print("[ ");
@@ -97,10 +103,17 @@ public class Main {
             if (flagNumbersNotCorrect) {
                 System.out.println("Non hai inserito correttamente i numeri nel quadrato");
                 System.exit(1);
+            } else {
+                System.out.println("I numeri sono stati inseriti correttamente");
             }
             // check magic square rules
-            checkMagicSquareRules(magicSquare);
+            boolean isMagic = checkMagicSquareRules(magicSquare);
             // output
+            if (isMagic) {
+                System.out.println("Il quadrato e` magico");
+            } else {
+                System.out.println("Il quadrato non e` magico");
+            }
         } else {
             System.out.println("Non hai formato un quadrato con i valori inseriti");
         }
