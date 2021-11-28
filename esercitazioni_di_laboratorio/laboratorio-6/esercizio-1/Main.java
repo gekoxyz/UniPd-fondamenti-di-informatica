@@ -20,6 +20,7 @@ public class Main {
         System.out.println("Inserisci il numero massimo per la generazione casuale: ");
         int maxElement = scan.nextInt();
         int vector[] = ArrayUtil.randomIntArray(vSize, maxElement);
+        vector = ArrayUtil.resize(vector, 100);
         ArrayUtil.printArray(vector, vSize);
         System.out.println("Inserisci un valore da inserire nell'array: ");
         int valueToInsert = scan.nextInt();

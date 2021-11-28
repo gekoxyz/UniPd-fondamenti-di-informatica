@@ -51,7 +51,7 @@ public class ArrayUtil {
      */
     public static void remove(int v[], int vSize, int index) {
         if (vSize > 0 && index < vSize) {
-            v[index] = v[vSize];
+            v[index] = v[vSize - 1];
             vSize--;
         }
     }
@@ -110,7 +110,7 @@ public class ArrayUtil {
                     max = v[i];
                 }
             }
-            return 0;
+            return max;
         }
         return 0;
     }
