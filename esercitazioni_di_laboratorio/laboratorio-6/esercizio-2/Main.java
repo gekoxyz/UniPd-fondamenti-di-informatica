@@ -51,6 +51,7 @@ public class Main {
                 }
             }
         }
+        System.out.println(number);
         return false;
     }
 
@@ -58,7 +59,64 @@ public class Main {
         // check sum of rows
         // check sum of columns
         // check sum of 2 main diagonals
-        return false;
+        int magicNumber = 0;
+        // get sum of 1st row, will call this magic number because it's the sum that
+        // must come
+        // out from all rows, columns and 2 main diagonals
+        for (int i = 0; i < magicSquare[0].length; i++) {
+            magicNumber += magicSquare[0][i];
+        }
+        // check other rows sum is equal, if false return false
+        int rowSum = 0;
+        for (int row = 1; row < magicSquare.length; row++) {
+            for (int column = 0; column < magicSquare[row].length; column++) {
+                rowSum += magicSquare[row][column];
+            }
+            if (rowSum == magicNumber) {
+                rowSum = 0;
+            } else {
+                return false;
+            }
+        }
+        int columnSum = 0;
+        // check other columns ...
+        for (int column = 1; column < magicSquare.length; column++) {
+            for (int row = 0; row < magicSquare[column].length; row++) {
+                columnSum += magicSquare[column][row];
+            }
+            if (columnSum == magicNumber) {
+                columnSum = 0;
+            } else {
+                return false;
+            }
+        }
+        // check diagonal 1 - i = i
+        int diagonalSum = 0;
+        for (int row = 0; row < magicSquare.length; row++) {
+            for (int column = 0; column < magicSquare[row].length; column++) {
+                if (row == column) {
+                    diagonalSum += magicSquare[row][column];
+                }
+            }
+        }
+        // if the sum is not equal return false because the square is not magic
+        if (diagonalSum != magicNumber) {
+            return false;
+        }
+        // diagonal sum at 0 because i need to check perpendicular diagonal
+        diagonalSum = 0;
+        // check diagonal 2 = i = i + len (-1 each time)
+        for (int row = 0; row < magicSquare.length; row++) {
+            for (int column = 0; column < magicSquare[row].length; column++) {
+                if ((row + column) == (magicSquare.length - 1)) {
+                    diagonalSum += magicSquare[row][column];
+                }
+            }
+        }
+        if (diagonalSum != magicNumber) {
+            return false;
+        }
+        return true;
     }
 
     public static void main(String[] args) {
@@ -68,11 +126,14 @@ public class Main {
         // getting input from user
         // if user inserts a number i enlarge the array and insert that number in the
         // array
-        while (scan.hasNextInt()) {
-            int n = scan.nextInt();
-            inputs++;
-            values = ArrayUtil.resize(values, inputs);
-            values[inputs - 1] = n;
+        while (scan.hasNext()) {
+            if (scan.hasNextInt()) {
+                inputs++;
+                values = ArrayUtil.resize(values, inputs);
+                values[inputs - 1] = scan.nextInt();
+            } else {
+                scan.next();
+            }
         }
         // checking if user inserted a square number of items in the array
         // if the number is not square quitting the program
