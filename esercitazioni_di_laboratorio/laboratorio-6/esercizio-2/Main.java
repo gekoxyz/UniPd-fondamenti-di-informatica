@@ -126,11 +126,14 @@ public class Main {
         // getting input from user
         // if user inserts a number i enlarge the array and insert that number in the
         // array
-        while (scan.hasNextInt()) {
-            int n = scan.nextInt();
-            inputs++;
-            values = ArrayUtil.resize(values, inputs);
-            values[inputs - 1] = n;
+        while (scan.hasNext()) {
+            if (scan.hasNextInt()) {
+                inputs++;
+                values = ArrayUtil.resize(values, inputs);
+                values[inputs - 1] = scan.nextInt();
+            } else {
+                scan.next();
+            }
         }
         // checking if user inserted a square number of items in the array
         // if the number is not square quitting the program
