@@ -15,7 +15,26 @@ di Euclide:
     - altrimenti, il M.C.D. di m ed n è uguale al M.C.D. di n e del resto della divisione intera di m per n
 */
 public class Main {
-    public static void main(String[] args) {
 
+    public static int recursiveMCD(int m, int n) {
+        if (m % n == 0)
+            return n;
+        return recursiveMCD(n, m % n);
+    }
+
+    public static void main(String[] args) {
+        if (args.length == 2) {
+            try {
+                int m = Integer.parseInt(args[0]);
+                int n = Integer.parseInt(args[1]);
+                System.out.println(m + ", " + n);
+                int mcd = recursiveMCD(m, n);
+                System.out.println("Il mcd di " + m + " e " + n + " e`: " + mcd);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Non hai inserito due parametri");
+        }
     }
 }
