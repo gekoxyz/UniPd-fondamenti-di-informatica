@@ -1,0 +1,3 @@
+Rossi 19 18
+Bianchi 30 15 
+Verdi 15 15
