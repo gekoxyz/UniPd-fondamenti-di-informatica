@@ -33,5 +33,22 @@ public class ArrayAlgorithms {
         if (bankAccounts.length < 2)
             return;
         int mid = bankAccounts.length / 2;
+        BankAccount left[] = new BankAccount[mid];
+        BankAccount right[] = new BankAccount[bankAccounts.length - mid];
+        System.arraycopy(bankAccounts, 0, left, 0, left.length);
+        System.arraycopy(bankAccounts, mid, right, 0, right.length);
+        bankAccountMergeSort(left);
+        bankAccountMergeSort(right);
+        int iBank = 0, iLeft = 0, iRight = 0;
+        while (iLeft < left.length && iRight < right.length) {
+            if (left[iLeft].compareTo(right[iRight]) == -1)
+                bankAccounts[iBank++] = left[iLeft++];
+            else
+                bankAccounts[iBank++] = right[iRight++];
+            while (iLeft < left.length)
+                bankAccounts[iBank++] = left[iLeft++];
+            while (iRight < right.length)
+                bankAccounts[iBank++] = right[iRight++];
+        }
     }
 }

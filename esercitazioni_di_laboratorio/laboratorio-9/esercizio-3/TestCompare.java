@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Random;
 
 public class TestCompare {
@@ -27,6 +26,9 @@ public class TestCompare {
         }
         System.out.println();
         System.out.println("--- MERGE SORT ---");
-        BankAccount mergeSortedAccounts[] = ArrayAlgorithms.bankAccountMergeSort(bankAccounts);
+        ArrayAlgorithms.bankAccountMergeSort(bankAccounts);
+        for (int i = 0; i < bankAccounts.length; i++) {
+            System.out.print(bankAccounts[i].getBalance() + " ");
+        }
     }
 }
