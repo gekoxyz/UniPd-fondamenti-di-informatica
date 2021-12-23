@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class DNAprofile {
@@ -52,7 +53,45 @@ public class DNAprofile {
     }
 
     public static String queryDatabase(int[] strsMatches, String databaseName) {
-        return "";
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(databaseName);
+        } catch (FileNotFoundException e) {
+            System.out.println("Database not found");
+        }
+        Scanner databaseScanner = new Scanner(fileReader);
+        databaseScanner.nextLine();
+        String[] suspectsNames = new String[0];
+        String[] suspectsSTRs = new String[0];
+        while (databaseScanner.hasNextLine()) {
+            // fetching single database line
+            String databaseRow = databaseScanner.nextLine();
+            Scanner rowScanner = new Scanner(databaseRow);
+            // getting suspect name and STRs
+            suspectsNames = ArrayUtils.resize(suspectsNames);
+            suspectsNames[suspectsNames.length - 1] = rowScanner.next();
+            suspectsSTRs = ArrayUtils.resize(suspectsSTRs);
+            String suspectSTRs = "";
+            while (rowScanner.hasNext()) {
+                suspectSTRs += rowScanner.next();
+            }
+            rowScanner.close();
+            suspectsSTRs[suspectsSTRs.length - 1] = suspectSTRs;
+        }
+        databaseScanner.close();
+        // put STRs matches in a string to use .equals
+        String toSearch = "";
+        for (int i = 0; i < strsMatches.length; i++) {
+            toSearch += strsMatches[i];
+        }
+        // search from suspects
+        for (int i = 0; i < suspectsSTRs.length; i++) {
+            if (suspectsSTRs[i].equals(toSearch))
+                return suspectsNames[i];
+        }
+        System.out.println(Arrays.toString(suspectsNames));
+        System.out.println(Arrays.toString(suspectsSTRs));
+        return "NOMATCH";
     }
 
     public static void main(String[] args) {
@@ -70,8 +109,10 @@ public class DNAprofile {
             // confront STRs number with STRs number in the database
             int[] strsMatches = strsAnalyzer.getSTRsMatches();
             String matchName = queryDatabase(strsMatches, databaseName);
-            System.out.println("Dal confronto con il sample di DNA " + dnaFile + " e il database " + databaseName
-                    + " c'e' stato un match con " + matchName);
+            if (matchName.equals("NOMATCH"))
+                System.out.println("Il confronto tra sample di DNA e database non ha restituito match");
+            else
+                System.out.println("Il confronto tra sample di DNA e database ha riscontrato un match con " + matchName);
         } else {
             System.out.println("Devi inserire il nome di entrambi i file!");
         }
