@@ -1,0 +1,49 @@
+Siete stati incaricati dal Reparto Investigazioni Scientifiche di analizzare il DNA ritrovato in 3 casi insoluti e confrontarlo con quello di 3 indagati per scoprire il colpevole. Ad oggi avete acquisito tutte le conoscenze necessarie per poter implementare un programma di questo tipo: sapete realizzare le classi, sovrascrivere i metodi di Object, rendere eseguibile una classe, leggere da file, analizzare le stringhe, utilizzare i cicli, anche annidati, e prendere delle decisioni con gli if.
+
+Il progetto e' un po' impegnativo, ma dovete anche cominciare ad abituarvi a scrivere codice che mette insieme diverse cose che abbiamo visto.  Tuttavia,  per chi avesse bisogno di un punto o da cui partire o di una guida da seguire, ho aggiunto un file alla file della consegna con delle indicazioni. Chi ritiene di non aver bisogno di guida puo' semplicemente ignorare il file.
+
+Background
+
+Il DNA, portatore dell'informazione genetica negli esseri viventi, e' utilizzato nelle investigazioni scientifiche da decenni. Ma come, esattamente, funziona la profilazione del DNA? Dato un campione di DNA, come riescono gli investigatori forensi a identificare a chi appartiene?
+
+Il DNA e' in realta' composto da una sequenza di molecole, dette nucleotidi, che formano una doppia elica. Ogni nucleotide di DNA contiene una tra quattro basi: adenine (A), cytosine (C), guanine (G), or thymine (T). Ogni cella umana contiene miliardi di questi nucleotidi sistemati in sequenza. Alcune porzioni di questa sequenza, che altro non e' che il genoma, sono le stesse o sono molto simili, a tutti gli esseri umani. Tuttavia, altre porzioni di sequenza hanno una diversita' genetica piu' alta e quindi variano tra individui di una stessa specie. Uno dei posti dove il DNA tende ad avere un'elevata diversita' genetica e' nelle  Short Tandem Repeats (STRs). Una STR e' una breve sequenza di DNA che tende a ripetersi piu' volte consecutivamente. Il numero di volte in cui una particolare STR si ripete varia molto tra individui diversi. Per esempio nell'immagine qui sotto Alice ha la STR "AGAT" ripetuta 4 volte nel suo DNA, mentre Bob ha la stessa STR ripetuta 5 volte.
+
+
+La probabilita' che due individui diversi abbiano lo stesso numero di ripetizioni per una stessa STR e' molto basso. Se poi si usano piu' STR, invece di una, possiamo migliorare l'accuratezza della profilazione del DNA, riducendo ancora di piu' questa probabilita'. I database dell'FBI, per esempio, usano 20 diversi STR, con una probabilita' che due DNA coincidano "per caso" pari o inferiore  a uno su 1000000000000000000 (ovvero 10^-18).
+
+Semplificando un po' le cose possiamo immaginare questi database come dei file, dove ogni riga corrisponde ad un individuo e ne riporta il nome, seguito dal numero di STR rilevate per ciascuna STR considerata e descritta nella prima riga.
+
+name   AGAT AATG TATC
+Alice   28    42   14
+Bob     17    22   19
+Charlie 36    18   25
+        
+
+Nell'esempio sopra, Alice ha la sequenza AGAT ripetuta 28 volte consecutive da qualche parte nel suo DNA, la sequenza AATG ripetuta 42 volte e TATC ripetuta 14 volte.  Bob ha queste stesse sequenze ripetute 17, 22 e 19 volte, rispettivamente. Charlie invece  36, 18 e 25 volte.
+
+Quindi, data una sequenza di DNA, che per noi altro non e' che una stringa, possiamo individuare a chi appartiene utilizzando tecniche bioinformatiche, ovvero sviluppando un algoritmo che analizzi tale sequenza e le informazioni presenti nel "database". In particolare si dovra':
+
+    Analizzare la sequenza di caratteri che rappresenta il DNA ritrovato nella scena del crimine cercando il numero di occorrenze consecutive di ciascuna STR presente nel database investigativo;
+    Confrontare i valori trovati (= profilo) con quelli corrispondenti agli individui "schedati" e se c'e'  corrispondenza allora c'e' una buona probabilita' che quell'individuo sia il colpevole.
+
+In realta' l'analisi e' un po' piu' complessa di come descritto qui, ma accontentiamoci!
+
+
+Specifiche
+
+Scrivere un programma eseguibile DNAProfile.java che identifica a chi appartiene la sequenza di DNA.
+
+Il programma richiedera' due argomenti da riga di comando: il nome del file che contiene i profili degli indagati e il nome del file che contiene la sequenza di DNA da identificare.
+
+La prima riga del file dei profili conterra' la parola "name"  e poi le sequenze delle STR considerate. Le righe successive conterranno il nome dell'individuo seguito dalla numerosita' delle STR rilevate nel suo DNA.
+
+Per ciascuna sequenza STR il programma dovra' calcolare la piu' lunga run di ripetizioni consecutive della STR nel DNA da identificare. Questa e' la parte, dal punto di vista algoritmico piu' complessa e sulla quale vi invito a ragionare su carta (potete utilizzare comunque i metodi della classe String, ad esempio substring).
+
+Se i conteggi di STR hanno un match con qualche profilo noto, il nome del presunto colpevole dovra' essere riportato in uscita, altrimenti si scrivera' "nessun match trovato". Potete assumere che il conteggio di STR avra' un match con al massimo un individuo.
+
+Utilizzando i file linkati sotto, se pensate possa semplificare, potete assumere inizialmente che il numero di individui sia 3 e che il numero di STR sia 3, poi potete generalizzare in un secondo momento.
+
+
+Utilizzo:
+
+java DNAprofile fileProfile fileDNA

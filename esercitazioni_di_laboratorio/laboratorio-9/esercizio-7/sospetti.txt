@@ -1,0 +1,4 @@
+name      AGAT AATG TATC
+Misseri    5    2    8
+Bossetti   3    7    4
+Pacciani   6    1    5
