@@ -21,6 +21,7 @@ public class DNAprofile {
         Scanner databaseScanner = new Scanner(fileReader);
         // getting strs which needs to be found
         String strsToParse = databaseScanner.nextLine();
+        databaseScanner.close();
         Scanner strsScanner = new Scanner(strsToParse);
         // parsing out the first column because it contains names
         strsScanner.next();
@@ -50,6 +51,10 @@ public class DNAprofile {
         return dna;
     }
 
+    public static String queryDatabase(int[] strsMatches, String databaseName) {
+        return "";
+    }
+
     public static void main(String[] args) {
         if (args.length > 1) {
             String databaseName = args[0];
@@ -63,6 +68,10 @@ public class DNAprofile {
             strsAnalyzer.analyzeDna();
             System.out.println(strsAnalyzer.toString());
             // confront STRs number with STRs number in the database
+            int[] strsMatches = strsAnalyzer.getSTRsMatches();
+            String matchName = queryDatabase(strsMatches, databaseName);
+            System.out.println("Dal confronto con il sample di DNA " + dnaFile + " e il database " + databaseName
+                    + " c'e' stato un match con " + matchName);
         } else {
             System.out.println("Devi inserire il nome di entrambi i file!");
         }

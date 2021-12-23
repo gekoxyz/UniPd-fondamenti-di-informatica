@@ -10,34 +10,31 @@ public class STRsAnalyzer {
     }
 
     public int[] analyzeDna() {
-        int matchingBases = 0;
         int matchingSTRs = 0;
+        // for each str in the database
         for (int i = 0; i < databaseStrs.length; i++) {
-            // getting each STR in the database
             String strToFind = databaseStrs[i];
+            // parsing every char of the DNA
             for (int dnaSequenceIndex = 0; dnaSequenceIndex < dnaSequence.length(); dnaSequenceIndex++) {
-                // if i get a match in the first char i continue to check the str
-                if (dnaSequence.charAt(dnaSequenceIndex) == strToFind.charAt(0)) {
-                    // check if str is longer than remaining chars to parse
-                    if (dnaSequenceIndex + strToFind.length() < dnaSequence.length()) {
-                        for (int k = 1; k < strToFind.length(); k++) {
-                            matchingBases++;
-                            if (dnaSequence.charAt(dnaSequenceIndex + k) == strToFind.charAt(k))
-                                matchingBases++;
-                            else
-                                break;
-                        }
-                        // if i get the same matching bases as str length i found a complete str match
-                        System.out.println(matchingBases);
-                        if (matchingBases == strToFind.length()) {
-                            matchingSTRs++;
-                        }
-                        matchingBases = 0;
+                // i check if the str matches only if it doesn't go out of bounds with the dna
+                // string
+                if (dnaSequenceIndex + strToFind.length() <= dnaSequence.length()) {
+                    String dnaSequenceSubString = dnaSequence.substring(dnaSequenceIndex,
+                            dnaSequenceIndex + strToFind.length());
+                    System.out.println(dnaSequenceSubString + "==" + strToFind);
+                    if (dnaSequenceSubString.equals(strToFind)) {
+                        matchingSTRs++;
+                        System.out.println(matchingSTRs);
                     }
                 }
             }
             strsMatches[i] = matchingSTRs;
+            matchingSTRs = 0;
         }
+        return strsMatches;
+    }
+
+    public int[] getSTRsMatches() {
         return strsMatches;
     }
 
