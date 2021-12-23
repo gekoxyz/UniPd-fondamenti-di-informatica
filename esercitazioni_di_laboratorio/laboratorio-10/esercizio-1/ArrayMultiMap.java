@@ -22,8 +22,10 @@ public class ArrayMultiMap implements MultiMap {
 
     @Override
     public void insert(Object key, Object value) {
-        pair[size] = new Pair(key, value);
-        size++;
+        if (size < CAPACITY) {
+            pair[size] = new Pair(key, value);
+            size++;
+        }
     }
 
     @Override
@@ -31,7 +33,8 @@ public class ArrayMultiMap implements MultiMap {
         for (int i = 0; i < size; i++) {
             if (pair[i].getKey().equals(key)) {
                 Object removed = pair[i].getValue();
-                pair[i] = null;
+                pair[i] = pair[size - 1];
+                size--;
                 return removed;
             }
         }
@@ -50,20 +53,51 @@ public class ArrayMultiMap implements MultiMap {
 
     @Override
     public Object[] findAll(Object key) {
-        // TODO Auto-generated method stub
-        return null;
+        Object[] values = new Object[0];
+        int valuesIndex = 0;
+        for (int i = 0; i < size; i++) {
+            if (key.equals(pair[i].getKey())) {
+                values = resize(values);
+                values[valuesIndex] = pair[i].getValue();
+                valuesIndex++;
+            }
+        }
+        return values;
     }
 
     @Override
     public Object[] keys() {
-        // TODO Auto-generated method stub
-        return null;
+        Object[] keys = new Object[size + 1];
+        for (int i = 0; i < size; i++)
+            keys[i] = pair[i].getValue();
+        return keys;
     }
 
     @Override
     public Object[] removeAll(Object key) {
-        // TODO Auto-generated method stub
-        return null;
+        Object[] keys = new Object[0];
+        int keysIndex = 0;
+        for (int i = 0; i < size; i++) {
+            if (pair[i].getKey().equals(key)) {
+                keys = resize(keys);
+                keys[keysIndex] = pair[i].getValue();
+                keysIndex++;
+            }
+            pair[i] = null;
+        }
+        size = 0;
+        return keys;
     }
 
+    public String size() {
+        return Integer.toString(size);
+    }
+
+    private static Object[] resize(Object[] arr) {
+        Object[] newArr = new Object[arr.length + 1];
+        for (int i = 0; i < arr.length; i++) {
+            newArr[i] = arr[i];
+        }
+        return newArr;
+    }
 }
