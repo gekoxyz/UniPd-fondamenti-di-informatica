@@ -2,10 +2,10 @@ public class ArrayMultiMap implements MultiMap {
 
     private Pair[] pair;
     private int size = 0;
-    private static final int CAPACITY = 10;
+    private static final int CAPACITY = 20;
 
     public ArrayMultiMap() {
-        pair = new Pair[10];
+        pair = new Pair[CAPACITY];
     }
 
     @Override
@@ -56,6 +56,7 @@ public class ArrayMultiMap implements MultiMap {
         Object[] values = new Object[0];
         int valuesIndex = 0;
         for (int i = 0; i < size; i++) {
+            System.out.println("CON " + pair[i].getKey());
             if (key.equals(pair[i].getKey())) {
                 values = resize(values);
                 values[valuesIndex] = pair[i].getValue();
