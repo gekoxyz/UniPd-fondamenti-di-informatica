@@ -17,7 +17,7 @@ public class MultiMapTester {
             m.insert(str, value);
         }
 
-        System.out.println("Numero di elementi introdotti " + m.size());
+        System.out.println("Numero di elementi introdotti " + m.getSize());
 
         System.out.println("Cerco il valore associato alla parola \"prova\"");
         Object obj = m.find("prova");

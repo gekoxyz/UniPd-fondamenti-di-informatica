@@ -23,6 +23,10 @@ public class ArrayMultiMap implements MultiMap {
     @Override
     public void insert(Object key, Object value) {
         if (size < CAPACITY) {
+            for (int i = 0; i < size; i++) {
+                if (pair[i].getKey().equals(key))
+                    return;
+            }
             pair[size] = new Pair(key, value);
             size++;
         }
@@ -90,7 +94,7 @@ public class ArrayMultiMap implements MultiMap {
         return keys;
     }
 
-    public String size() {
+    public String getSize() {
         return Integer.toString(size);
     }
 
