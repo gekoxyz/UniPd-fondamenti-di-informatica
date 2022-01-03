@@ -20,7 +20,6 @@ public class ArrayMultiMap implements MultiMap {
         }
     }
 
-    // change to insert in correct order
     @Override
     public void insert(Object key, Object value) {
         int pos = binarySearch(key);
